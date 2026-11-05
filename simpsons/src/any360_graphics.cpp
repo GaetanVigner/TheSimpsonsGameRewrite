@@ -27,6 +27,10 @@ REXCVAR_DEFINE_INT32(any360_gpu_vblank_hz, 0, "GPU",
                      "Any360: vertical blank interrupts a second (0: 60 with vsync, 1000 without)");
 REXCVAR_DEFINE_STRING(any360_gpu_profile, "", "GPU",
                       "Any360: a file for samples of every thread (empty: none)");
+REXCVAR_DEFINE_INT32(any360_gpu_record_threads, -1, "GPU",
+                     "Any360: threads that record draws (-1: from the cores, 0: none, the renderer's thread does)");
+REXCVAR_DEFINE_INT32(any360_gpu_spin, -1, "GPU",
+                     "Any360: -1 the command processor and the renderer spin a moment when waiting, 0 they sleep at once");
 REXCVAR_DEFINE_STRING(any360_gpu_capture, "", "GPU",
                       "Any360: a frame capture file for gfx_replay, written when <file>.go appears (empty: none)");
 REXCVAR_DEFINE_INT32(any360_gpu_capture_kicks, 60, "GPU", "Any360: ring kicks a capture records");
@@ -50,6 +54,8 @@ void StartAny360GraphicsIfAsked() {
   options.fences_after_draws = REXCVAR_GET(any360_gpu_fences_after_draws);
   options.vblank_hz = double(REXCVAR_GET(any360_gpu_vblank_hz));
   options.profile_path = REXCVAR_GET(any360_gpu_profile);
+  options.record_threads = REXCVAR_GET(any360_gpu_record_threads);
+  options.spin = REXCVAR_GET(any360_gpu_spin);
 #ifdef ANY360_REXGLUE_CAPTURE
   options.capture_path = REXCVAR_GET(any360_gpu_capture);
   options.capture_kicks = uint32_t(std::max(1, REXCVAR_GET(any360_gpu_capture_kicks)));
