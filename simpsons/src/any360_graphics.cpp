@@ -27,6 +27,9 @@ REXCVAR_DEFINE_INT32(any360_gpu_vblank_hz, 0, "GPU",
                      "Any360: vertical blank interrupts a second (0: 60 with vsync, 1000 without)");
 REXCVAR_DEFINE_STRING(any360_gpu_profile, "", "GPU",
                       "Any360: a file for samples of every thread (empty: none)");
+REXCVAR_DEFINE_STRING(any360_gpu_capture, "", "GPU",
+                      "Any360: a frame capture file for gfx_replay, written when <file>.go appears (empty: none)");
+REXCVAR_DEFINE_INT32(any360_gpu_capture_kicks, 60, "GPU", "Any360: ring kicks a capture records");
 
 // The GPU system calls, overridden in the executable: the runtime's until StartGraphics succeeds, Any360's after.
 // The game does not hook VdSwap itself, so it is bound here too.
@@ -47,6 +50,10 @@ void StartAny360GraphicsIfAsked() {
   options.fences_after_draws = REXCVAR_GET(any360_gpu_fences_after_draws);
   options.vblank_hz = double(REXCVAR_GET(any360_gpu_vblank_hz));
   options.profile_path = REXCVAR_GET(any360_gpu_profile);
+#ifdef ANY360_REXGLUE_CAPTURE
+  options.capture_path = REXCVAR_GET(any360_gpu_capture);
+  options.capture_kicks = uint32_t(std::max(1, REXCVAR_GET(any360_gpu_capture_kicks)));
+#endif
   options.log = [](const std::string& line) { REXLOG_INFO("{}", line); };
   std::string error;
   if (any360::host::rexglue::StartGraphics(options, error)) {
