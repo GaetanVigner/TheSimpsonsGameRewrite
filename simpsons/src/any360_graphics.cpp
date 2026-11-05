@@ -34,6 +34,8 @@ REXCVAR_DEFINE_INT32(any360_gpu_spin, -1, "GPU",
 REXCVAR_DEFINE_STRING(any360_gpu_capture, "", "GPU",
                       "Any360: a frame capture file for gfx_replay, written when <file>.go appears (empty: none)");
 REXCVAR_DEFINE_INT32(any360_gpu_capture_kicks, 60, "GPU", "Any360: ring kicks a capture records");
+REXCVAR_DEFINE_BOOL(any360_gpu_show_fps, true, "GPU",
+                    "Any360: a frame rate counter over the top-left corner (FPS, frame time, GPU time, command processor idle)");
 
 // The GPU system calls, overridden in the executable: the runtime's until StartGraphics succeeds, Any360's after.
 // The game does not hook VdSwap itself, so it is bound here too.
@@ -43,7 +45,13 @@ ANY360_REXGLUE_BIND_GRAPHICS(VdSwap)
 namespace simpsons {
 
 void StartAny360GraphicsIfAsked() {
-  if (!REXCVAR_GET(any360_gpu)) return;
+  if (!REXCVAR_GET(any360_gpu)) {
+#ifdef ANY360_REXGLUE_REPORT_RUNTIME_FRAMES
+    // The runtime's GPU: its frame rate logged too, to compare with Any360's.
+    any360::host::rexglue::ReportRuntimeFrames([](const std::string& line) { REXLOG_INFO("{}", line); });
+#endif
+    return;
+  }
   any360::host::rexglue::GraphicsOptions options;
   options.gpu = REXCVAR_GET(any360_gpu_device);
   options.resolution_scale = uint32_t(std::clamp(REXCVAR_GET(any360_gpu_scale), 1, 4));
@@ -59,6 +67,9 @@ void StartAny360GraphicsIfAsked() {
 #ifdef ANY360_REXGLUE_CAPTURE
   options.capture_path = REXCVAR_GET(any360_gpu_capture);
   options.capture_kicks = uint32_t(std::max(1, REXCVAR_GET(any360_gpu_capture_kicks)));
+#endif
+#ifdef ANY360_REXGLUE_SHOW_FPS
+  options.show_fps = REXCVAR_GET(any360_gpu_show_fps);
 #endif
   options.log = [](const std::string& line) { REXLOG_INFO("{}", line); };
   std::string error;
