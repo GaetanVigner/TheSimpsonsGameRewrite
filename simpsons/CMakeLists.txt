@@ -43,6 +43,25 @@ endif()
 
 rexglue_setup_target(simpsons)
 
+# Test branch any360-graphics-test: the GPU through Any360 (any360::sys + any360::gfx) behind the any360_gpu
+# setting (src/any360_graphics.cpp), when SIMPSONS_ANY360_DIR names an Any360 checkout
+# (github.com/GaetanVigner/Any360). Its layers are built with this toolchain against the in-tree SDK's headers.
+set(SIMPSONS_ANY360_DIR "" CACHE PATH "Any360 checkout (empty: the runtime's GPU only)")
+if(SIMPSONS_ANY360_DIR)
+    set(ANY360_REFERENCE_SDK "${REXSDK_DIR}" CACHE PATH "ReXGlue SDK Any360 builds against" FORCE)
+    add_subdirectory("${SIMPSONS_ANY360_DIR}/layer/sys" any360 EXCLUDE_FROM_ALL)
+    # The in-tree SDK is a set of targets, not an install: its runtime brings the headers and their dependencies
+    # (fmt, spdlog) and the import library the binding calls into.
+    target_link_libraries(any360_sys_ppc PUBLIC rex::runtime)
+    target_sources(simpsons PRIVATE src/any360_graphics.cpp)
+    target_compile_definitions(simpsons PRIVATE SIMPSONS_ANY360=1)
+    target_link_libraries(simpsons PRIVATE any360_host_rexglue)
+    # This SDK's runtime exports parts of rex::graphics::SpirvShaderTranslator, which Any360 vendors under the same
+    # name (layer/gfx/third_party/xenos_shader): the vendored library goes ahead of the runtime's import library on
+    # the link line, so Any360's code gets its own copy instead of a duplicate.
+    target_link_options(simpsons PRIVATE "$<TARGET_LINKER_FILE:any360_xenos_shader>")
+endif()
+
 # draw_telemetry.cpp calls fmt directly; the prebuilt SDK exposes fmt headers
 # transitively, but REXSDK_DIR (add_subdirectory) builds -- what CI uses --
 # need the explicit link for the target to see fmt's usage requirements.
