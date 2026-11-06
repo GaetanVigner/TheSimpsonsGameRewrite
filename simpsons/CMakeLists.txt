@@ -53,7 +53,7 @@ if(SIMPSONS_ANY360_DIR)
     # The in-tree SDK is a set of targets, not an install: its runtime brings the headers and their dependencies
     # (fmt, spdlog) and the import library the binding calls into.
     target_link_libraries(any360_sys_ppc PUBLIC rex::runtime)
-    target_sources(simpsons PRIVATE src/any360_graphics.cpp)
+    target_sources(simpsons PRIVATE src/any360_graphics.cpp src/any360_system.cpp)
     target_compile_definitions(simpsons PRIVATE SIMPSONS_ANY360=1)
     target_link_libraries(simpsons PRIVATE any360_host_rexglue)
     # This SDK's runtime exports parts of rex::graphics::SpirvShaderTranslator, which Any360 vendors under the same

@@ -7,6 +7,7 @@
 #include <rex/rex_app.h>
 #include <rex/runtime.h>
 #ifdef SIMPSONS_ANY360
+#include "any360/host/settings.h"
 #include "any360_graphics.h"
 #endif
 
@@ -50,10 +51,13 @@ class SimpsonsApp : public rex::ReXApp {
     InitFreecam(window());
 #ifdef SIMPSONS_ANY360
     simpsons::StartAny360GraphicsIfAsked();
+    // The system calls on any360::sys, the groups any360_sys_groups names (before the title's first instruction).
+    any360::host::rexglue::StartSystemFromSettings(game_data_root(), user_data_root());
 #endif
   }
   void OnShutdown() override {
 #ifdef SIMPSONS_ANY360
+    any360::host::rexglue::StopSystemFromSettings();
     simpsons::StopAny360Graphics();
 #endif
     ShutdownFreecam(window());
