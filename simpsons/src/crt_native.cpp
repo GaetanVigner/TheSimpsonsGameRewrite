@@ -17,6 +17,13 @@
 // source that repeats the copied bytes, which the host's memcpy and memmove
 // don't, so such a copy keeps the original routine, as does anything else
 // outside the cases above.
+//
+// In a build with Any360 (SIMPSONS_ANY360), memset, memcpy and the simpler
+// copy are Any360's native functions, shared by every title (any360::xdk:
+// unit tests, a benchmark and the any360_xdk_verify / any360_xdk_bench
+// settings, Any360's docs/NATIVE_FUNCTIONS.md); the code here for those three
+// is only what a build without Any360 runs. The 64-byte block copy and the
+// write-combined copy are this title's own until Any360 has them.
 
 #include "guest_memory.h"
 
@@ -24,6 +31,10 @@
 #include <cstring>
 
 #include <rex/ppc.h>
+
+#if SIMPSONS_ANY360
+#include "any360/host/xdk_natives.h"
+#endif
 
 REX_EXTERN(__imp__sub_82A3C440);
 REX_EXTERN(sub_82A3C440);
@@ -59,6 +70,14 @@ bool OneHostRange(uint32_t address, uint32_t size) {
 
 }  // namespace
 
+#if SIMPSONS_ANY360
+
+ANY360_XDK_BIND(82A3C440, CrtMemset)
+ANY360_XDK_BIND(82A3CD80, CrtMemcpy)
+ANY360_XDK_BIND(82A3D1D8, CrtCopyForward)
+
+#else
+
 REX_FUNC(sub_82A3C440) {
   const uint32_t destination = ctx.r3.u32;
   const uint32_t size = ctx.r5.u32;
@@ -78,8 +97,8 @@ REX_FUNC(sub_82A3CD80) {
     __imp__sub_82A3CD80(ctx, base);
     return;
   }
-  // std r3,-8(r1)
-  const uint64_t saved = std::byteswap(uint64_t(destination));
+  // std r3,-8(r1): the register's 64 bits, not the address alone.
+  const uint64_t saved = std::byteswap(ctx.r3.u64);
   std::memcpy(GuestToHost(base, ctx.r1.u32 - 8), &saved, sizeof(saved));
   std::memmove(GuestToHost(base, destination), GuestToHost(base, source), size);
 }
@@ -95,6 +114,8 @@ REX_FUNC(sub_82A3D1D8) {
   }
   std::memmove(GuestToHost(base, destination), GuestToHost(base, source), size);
 }
+
+#endif  // SIMPSONS_ANY360
 
 REX_FUNC(sub_8270A590) {
   const uint32_t destination = ctx.r3.u32;
