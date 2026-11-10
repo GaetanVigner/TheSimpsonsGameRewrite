@@ -10,7 +10,7 @@
 | **System calls** | 317 of 317 on `any360::sys` (opt-in) |
 | **Graphics** | `any360::gfx`, a Vulkan renderer handling 283 of 323 Xbox 360 GPU features (opt-in) |
 | **Host** | ReXGlue's loader, threads and window; Any360's own host is not started |
-| **Game code** | 24 of 81,372 functions rewritten in C++ (0.03%) |
+| **Game code** | 19 of 58,125 functions rewritten in C++ (0.03%) |
 
 Updated 2026-11-10. Every system call, module and rewritten function: [PROGRESS.md](docs/progress/PROGRESS.md). What is missing, step by step: [ROADMAP.md](docs/progress/ROADMAP.md). Function by function: [functions.csv](docs/progress/functions.csv).
 <!-- progress:end -->

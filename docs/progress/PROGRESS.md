@@ -11,8 +11,9 @@ Generated on 2026-11-10 by [Any360](https://github.com/GaetanVigner/Any360)'s `t
 | System calls on `any360::sys` | 317 | 317 | 100% | all eight groups, opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game |
 | Graphics on `any360::gfx` (GPU features Any360 handles) | 283 | 323 | 88% | opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU |
 | Host (XEX loader, address space, threads, window, input, audio output) | 0 | 2 | 0% | ReXGlue's host runs the title; Any360 steps 13 and 14 |
-| Game functions rewritten in C++ | 24 | 81,372 | 0.03% | 0 more verified against the original in the sandbox |
-| Library functions (SDK, middleware) replaced | 3 | 502 | 0.6% | replaced as units, not decompiled |
+| Game functions rewritten in C++ | 19 | 58,125 | 0.03% | 0 more verified against the original in the sandbox |
+| Library functions (SDK, middleware) replaced | 7 | 16,228 | 0.04% | replaced as units, not decompiled |
+| Middleware functions (third-party physics, AI, scripting, video) | - | 7,521 | - | kept recompiled or relinked from the vendor's library, not rewritten |
 | Instructions of rewritten functions | 1,874 | 2,938,307 | 0.06% | PowerPC instructions of the original |
 
 ## System calls
@@ -374,23 +375,28 @@ What `any360::gfx` handles of the Xbox 360 GPU (the same for every title; a titl
 
 ## Game code
 
-Every function of the executable by module (named address ranges; the rest by 1 MB area until symbol recovery names them). **native**: rewritten: bound to C++. **verified**: checked against the original in the sandbox. **library**: SDK or middleware code, replaced as a unit. **recompiled**: recompiled PowerPC, still to rewrite.
+Every function of the executable by module (named address ranges; the rest by 1 MB area until symbol recovery names them). **native**: rewritten: bound to C++. **verified**: checked against the original in the sandbox. **library**: SDK code, replaced as a unit by Any360. **middleware**: third-party engine code (physics, AI, video ...): kept or relinked, not rewritten. **recompiled**: recompiled PowerPC, still to rewrite.
 
 | Module | Kind | Functions | Instructions | Native | Verified | Still recompiled | Native share |
 |---|---|---|---|---|---|---|---|
+| XDK D3DX and XGraphics (shader compiler) | library | 10,871 | 676,089 | 0 | 0 | 10,871 | 0% |
 | code 829xxxxx | game | 9,610 | 320,385 | 2 | 0 | 9,608 | 0.02% |
-| code 82Axxxxx | game | 7,677 | 302,296 | 1 | 0 | 7,676 | 0.01% |
-| code 828xxxxx | game | 9,026 | 290,234 | 1 | 0 | 9,025 | 0.01% |
-| code 82Bxxxxx | game | 5,101 | 277,193 | 2 | 0 | 5,099 | 0.04% |
+| Havok Physics | middleware | 6,638 | 277,751 | 1 | 0 | 6,637 | 0.02% |
 | code 827xxxxx | game | 9,003 | 270,114 | 5 | 0 | 8,998 | 0.06% |
-| code 826xxxxx | game | 8,053 | 264,738 | 8 | 0 | 8,045 | 0.10% |
 | code 823xxxxx | game | 8,302 | 263,273 | 2 | 0 | 8,300 | 0.02% |
-| code 825xxxxx | game | 4,264 | 260,764 | 0 | 0 | 4,264 | 0% |
-| code 824xxxxx | game | 4,235 | 251,255 | 3 | 0 | 4,232 | 0.07% |
-| code 82Cxxxxx | game | 5,931 | 211,751 | 0 | 0 | 5,931 | 0% |
+| code 828xxxxx | game | 8,143 | 256,060 | 1 | 0 | 8,142 | 0.01% |
 | code 822xxxxx | game | 10,170 | 208,106 | 0 | 0 | 10,170 | 0% |
-| XDK D3D command writers | library | 342 | 14,973 | 0 | 0 | 342 | 0% |
-| CRT (string / memory) | library | 64 | 3,005 | 3 | 0 | 61 | 4.7% |
+| code 826xxxxx | game | 4,753 | 121,328 | 8 | 0 | 4,745 | 0.2% |
+| code 82Axxxxx | game | 2,705 | 106,094 | 0 | 0 | 2,705 | 0% |
+| code 82Cxxxxx | game | 3,731 | 92,998 | 0 | 0 | 3,731 | 0% |
+| C runtime (CRT) | library | 1,091 | 54,874 | 3 | 0 | 1,088 | 0.3% |
+| XDK audio (XAudio, XMA) | library | 1,430 | 54,273 | 0 | 0 | 1,430 | 0% |
+| XDK D3D runtime | library | 1,636 | 53,387 | 2 | 0 | 1,634 | 0.1% |
+| code 82Bxxxxx | game | 763 | 51,772 | 1 | 0 | 762 | 0.1% |
+| code 824xxxxx | game | 945 | 51,037 | 0 | 0 | 945 | 0% |
+| Lua | middleware | 883 | 34,174 | 0 | 0 | 883 | 0% |
+| XDK Xbox Live and voice (XOnline, XHV) | library | 756 | 30,487 | 0 | 0 | 756 | 0% |
+| XAPI (Win32 layer over the kernel and XAM) | library | 348 | 15,885 | 2 | 0 | 346 | 0.6% |
 | kernel import thunks | library | 96 | 220 | 0 | 0 | 96 | 0% |
 
 <details><summary>The 27 rewritten functions</summary>
@@ -399,9 +405,9 @@ Every function of the executable by module (named address ranges; the rest by 1 
 |---|---|---|---|---|
 | `823462F8` | code 823xxxxx | 9 | `-` | audio.cpp |
 | `823A0C08` | code 823xxxxx | 12 | `-` | subtitles.cpp |
-| `824324A8` | code 824xxxxx | 4 | `-` | tick_count.cpp |
-| `82452018` | code 824xxxxx | 45 | `-` | ring_wait.cpp |
-| `82453EB0` | code 824xxxxx | 99 | `-` | frame_pacing.cpp |
+| `824324A8` | XAPI (Win32 layer over the kernel and XAM) | 4 | `-` | tick_count.cpp |
+| `82452018` | XDK D3D runtime | 45 | `-` | ring_wait.cpp |
+| `82453EB0` | XDK D3D runtime | 99 | `-` | frame_pacing.cpp |
 | `8268FAA8` | code 826xxxxx | 16 | `-` | physics_step.cpp |
 | `82690D60` | code 826xxxxx | 142 | `-` | game_clock.cpp |
 | `82691530` | code 826xxxxx | 3 | `-` | freecam.cpp |
@@ -418,12 +424,12 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | `82867D60` | code 828xxxxx | 43 | `-` | frame_pacing.cpp |
 | `8299EAB8` | code 829xxxxx | 105 | `-` | physics_step.cpp |
 | `829ED8D8` | code 829xxxxx | 72 | `-` | physics_step.cpp |
-| `82A3C440` | CRT (string / memory) | 40 | `-` | crt_native.cpp |
-| `82A3CD80` | CRT (string / memory) | 265 | `-` | crt_native.cpp |
-| `82A3D1D8` | CRT (string / memory) | 42 | `-` | crt_native.cpp |
-| `82AA2070` | code 82Axxxxx | 60 | `-` | physics_step.cpp |
+| `82A3C440` | C runtime (CRT) | 40 | `-` | crt_native.cpp |
+| `82A3CD80` | C runtime (CRT) | 265 | `-` | crt_native.cpp |
+| `82A3D1D8` | C runtime (CRT) | 42 | `-` | crt_native.cpp |
+| `82AA2070` | Havok Physics | 60 | `-` | physics_step.cpp |
 | `82B74110` | code 82Bxxxxx | 197 | `-` | crt_native.cpp |
-| `82B766A8` | code 82Bxxxxx | 3 | `-` | freecam.cpp |
+| `82B766A8` | XAPI (Win32 layer over the kernel and XAM) | 3 | `-` | freecam.cpp |
 
 </details>
 
@@ -435,7 +441,7 @@ Any360's own steps towards hosting a title without ReXGlue's runtime ([Any360 RE
 |---|---|---|
 | 9 | no call reaching the runtime: every path, the raw hard drive devices, the profile defaults on `any360::sys` | done (Crackdown; the host stays ReXGlue's until step 13) |
 | 10 | a second title (The Simpsons Game) on the full system binding | done (all groups, levels, saves, sound, gamepad) |
-| 11 | third and fourth titles (Test Drive Unlimited, Sonic 06) | not started |
+| 11 | third and fourth titles (Test Drive Unlimited, Sonic 06) | partial: Test Drive Unlimited boots to its title screen with all eight groups on `any360::sys` and no call reaching the runtime; gameplay, saves and sound not checked yet; Sonic 06 not started |
 | 12 | paths no title took yet: `XMA*` decoding, STFS packages, several users, guide UIs, Live offline, xbdm | partial: 602 of 2,914 exports native with scenario tests, none of the 2,294 reference stubs sorted |
 | 13 | Any360's own host: XEX loader, address space, threads, guest dispatch, MMIO, devices | not started |
 | 14 | the platform layer: window, input, audio, presenter on Windows and Linux (Steam Deck) | partial: SDL3 audio output only |

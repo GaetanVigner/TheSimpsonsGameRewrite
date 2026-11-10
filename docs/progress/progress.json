@@ -18,19 +18,21 @@
   "total": 81874,
   "native": 27,
   "verified": 0,
-  "library": 499,
-  "recompiled": 81348
+  "library": 16221,
+  "middleware": 7520,
+  "recompiled": 58106
  },
  "game_functions": {
-  "total": 81372,
-  "native": 24,
+  "total": 58125,
+  "native": 19,
   "verified": 0
  },
  "instructions": {
   "total": 2938307,
   "native": 1874,
   "verified": 0,
-  "library": 17851,
-  "recompiled": 2918582
+  "library": 884717,
+  "middleware": 311865,
+  "recompiled": 1739851
  }
 }
