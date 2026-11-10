@@ -18,12 +18,13 @@
 // don't, so such a copy keeps the original routine, as does anything else
 // outside the cases above.
 //
-// In a build with Any360 (SIMPSONS_ANY360), memset, memcpy and the simpler
-// copy are Any360's native functions, shared by every title (any360::xdk:
-// unit tests, a benchmark and the any360_xdk_verify / any360_xdk_bench
-// settings, Any360's docs/NATIVE_FUNCTIONS.md); the code here for those three
-// is only what a build without Any360 runs. The 64-byte block copy and the
-// write-combined copy are this title's own until Any360 has them.
+// In a build with Any360 (SIMPSONS_ANY360), memset, memcpy, the simpler copy,
+// memmove (sub_82A3E2B0) and the XDK's vector copy (sub_82B74110) are Any360's
+// native functions, shared by every title (any360::xdk: unit tests, a
+// benchmark and the any360_xdk_verify / any360_xdk_bench settings, Any360's
+// docs/NATIVE_FUNCTIONS.md); the code here for them is only what a build
+// without Any360 runs. The 64-byte block copy is this title's own code, not
+// a library's: it stays here.
 
 #include "guest_memory.h"
 
@@ -75,6 +76,9 @@ bool OneHostRange(uint32_t address, uint32_t size) {
 ANY360_XDK_BIND(82A3C440, CrtMemset)
 ANY360_XDK_BIND(82A3CD80, CrtMemcpy)
 ANY360_XDK_BIND(82A3D1D8, CrtCopyForward)
+ANY360_XDK_BIND(82A3E2B0, CrtMemmove)
+// The XDK's vector copy; kCopyByteStep is the global its byte loop subtracts from the count (1).
+ANY360_XDK_BIND_WITH(82B74110, XMemCpy, kCopyByteStep)
 
 #else
 
@@ -129,15 +133,21 @@ REX_FUNC(sub_8270A590) {
   std::memmove(GuestToHost(base, destination), GuestToHost(base, source), size);
 }
 
+#if !SIMPSONS_ANY360
+
 REX_FUNC(sub_82B74110) {
   const uint32_t destination = ctx.r3.u32;
   const uint32_t source = ctx.r4.u32;
   const uint32_t size = ctx.r5.u32;
-  if (LoadGuestU32(base, kCopyByteStep) != 1 ||
-      !ForwardCopyIsPlain(destination, source, size) || !OneHostRange(destination, size) ||
+  // The routine zeroes the destination's cache lines ahead of writing them: two ranges that overlap are its own
+  // business (the zeroed line can hold source bytes it has not read yet).
+  const bool apart = destination >= source ? destination - source >= size : source - destination >= size;
+  if (LoadGuestU32(base, kCopyByteStep) != 1 || !apart || !OneHostRange(destination, size) ||
       !OneHostRange(source, size)) {
     __imp__sub_82B74110(ctx, base);
     return;
   }
   std::memmove(GuestToHost(base, destination), GuestToHost(base, source), size);
 }
+
+#endif  // !SIMPSONS_ANY360
