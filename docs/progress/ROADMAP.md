@@ -46,7 +46,7 @@ SDK code linked into the executable is not decompiled: Any360 provides the same 
 | Library range | Functions | Instructions | Replaced | Verified in the sandbox | Left |
 |---|---|---|---|---|---|
 | XDK D3DX and XGraphics (shader compiler) | 10,871 | 676,089 | 0 | 0 | 10,871 |
-| C runtime (CRT) | 1,091 | 54,874 | 3 | 0 | 1,088 |
+| C runtime (CRT) | 1,091 | 54,874 | 4 | 0 | 1,087 |
 | XDK audio (XAudio, XMA) | 1,430 | 54,273 | 0 | 0 | 1,430 |
 | XDK D3D runtime | 1,636 | 53,387 | 2 | 0 | 1,634 |
 | XDK Xbox Live and voice (XOnline, XHV) | 756 | 30,487 | 0 | 0 | 756 |
@@ -62,14 +62,14 @@ Third-party middleware the game links (physics, AI, scripting, video and the lik
 
 ## 5. Game code as portable C++
 
-58,106 of 58,125 game functions are still recompiled PowerPC. The list, function by function, is [functions.csv](functions.csv) (state `recompiled` or `verified`). By module, largest first:
+58,103 of 58,125 game functions are still recompiled PowerPC. The list, function by function, is [functions.csv](functions.csv) (state `recompiled` or `verified`). By module, largest first:
 
 | Module | Functions left | Instructions left | Rewritten | Verified |
 |---|---|---|---|---|
 | code 822xxxxx | 10,170 | 208,106 | 0 | 0 |
-| code 829xxxxx | 9,608 | 320,208 | 2 | 0 |
+| code 829xxxxx | 9,606 | 319,997 | 4 | 0 |
 | code 827xxxxx | 8,998 | 269,968 | 5 | 0 |
-| code 823xxxxx | 8,300 | 263,252 | 2 | 0 |
+| code 823xxxxx | 8,299 | 263,107 | 3 | 0 |
 | code 828xxxxx | 8,142 | 256,017 | 1 | 0 |
 | code 826xxxxx | 4,745 | 120,596 | 8 | 0 |
 | code 82Cxxxxx | 3,731 | 92,998 | 0 | 0 |

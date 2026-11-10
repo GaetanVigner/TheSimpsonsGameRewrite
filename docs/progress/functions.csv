@@ -11962,7 +11962,7 @@ address,module,kind,instructions,state,handler,file
 82321000,code 823xxxxx,game,8,recompiled,,
 82321020,code 823xxxxx,game,31,recompiled,,
 823210A0,code 823xxxxx,game,4,recompiled,,
-823210B0,code 823xxxxx,game,145,recompiled,,
+823210B0,code 823xxxxx,game,145,native,,stick_watch.cpp
 823212F8,code 823xxxxx,game,87,recompiled,,
 82321458,code 823xxxxx,game,25,recompiled,,
 823214C0,code 823xxxxx,game,40,recompiled,,
@@ -56872,7 +56872,7 @@ address,module,kind,instructions,state,handler,file
 8295C108,code 829xxxxx,game,97,recompiled,,
 8295C290,code 829xxxxx,game,330,recompiled,,
 8295C7B8,code 829xxxxx,game,129,recompiled,,
-8295C9C0,code 829xxxxx,game,121,recompiled,,
+8295C9C0,code 829xxxxx,game,121,native,,stick_watch.cpp
 8295CBA8,code 829xxxxx,game,46,recompiled,,
 8295CC60,code 829xxxxx,game,115,recompiled,,
 8295CE30,code 829xxxxx,game,115,recompiled,,
@@ -57004,7 +57004,7 @@ address,module,kind,instructions,state,handler,file
 82960670,code 829xxxxx,game,29,recompiled,,
 829606E8,code 829xxxxx,game,20,recompiled,,
 82960738,code 829xxxxx,game,78,recompiled,,
-82960870,code 829xxxxx,game,90,recompiled,,
+82960870,code 829xxxxx,game,90,native,,stick_watch.cpp
 829609D8,code 829xxxxx,game,34,recompiled,,
 82960A60,code 829xxxxx,game,3,recompiled,,
 82960A70,code 829xxxxx,game,5,recompiled,,
@@ -64953,7 +64953,7 @@ address,module,kind,instructions,state,handler,file
 82A3C31C,C runtime (CRT),library,10,library,,
 82A3C348,C runtime (CRT),library,447,library,,
 82A3C434,C runtime (CRT),library,3,library,,
-82A3C440,C runtime (CRT),library,40,native,,crt_native.cpp
+82A3C440,C runtime (CRT),library,40,native,CrtMemset,crt_native.cpp
 82A3C4E0,C runtime (CRT),library,1,library,,
 82A3C4E8,C runtime (CRT),library,37,library,,
 82A3C580,C runtime (CRT),library,5,library,,
@@ -64985,8 +64985,8 @@ address,module,kind,instructions,state,handler,file
 82A3CC84,C runtime (CRT),library,52,library,,
 82A3CD3C,C runtime (CRT),library,6,library,,
 82A3CD54,C runtime (CRT),library,8,library,,
-82A3CD80,C runtime (CRT),library,265,native,,crt_native.cpp
-82A3D1D8,C runtime (CRT),library,42,native,,crt_native.cpp
+82A3CD80,C runtime (CRT),library,265,native,CrtMemcpy,crt_native.cpp
+82A3D1D8,C runtime (CRT),library,42,native,CrtCopyForward,crt_native.cpp
 82A3D280,C runtime (CRT),library,23,library,,
 82A3D2E0,C runtime (CRT),library,14,library,,
 82A3D318,C runtime (CRT),library,44,library,,
@@ -65001,7 +65001,7 @@ address,module,kind,instructions,state,handler,file
 82A3DBF8,C runtime (CRT),library,9,library,,
 82A3DC20,C runtime (CRT),library,98,library,,
 82A3DDA8,C runtime (CRT),library,319,library,,
-82A3E2B0,C runtime (CRT),library,47,library,,
+82A3E2B0,C runtime (CRT),library,47,native,CrtMemmove,crt_native.cpp
 82A3E370,C runtime (CRT),library,2,library,,
 82A3E378,C runtime (CRT),library,50,library,,
 82A3E440,C runtime (CRT),library,57,library,,
@@ -73501,7 +73501,7 @@ address,module,kind,instructions,state,handler,file
 82B73EF0,code 82Bxxxxx,game,63,recompiled,,
 82B73FF0,code 82Bxxxxx,game,68,recompiled,,
 82B74108,code 82Bxxxxx,game,1,recompiled,,
-82B74110,code 82Bxxxxx,game,197,native,,crt_native.cpp
+82B74110,code 82Bxxxxx,game,197,native,XMemCpy,crt_native.cpp
 82B74428,code 82Bxxxxx,game,1,recompiled,,
 82B74430,code 82Bxxxxx,game,43,recompiled,,
 82B744E0,code 82Bxxxxx,game,43,recompiled,,

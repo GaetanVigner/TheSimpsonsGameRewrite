@@ -11,10 +11,10 @@ Generated on 2026-11-10 by [Any360](https://github.com/GaetanVigner/Any360)'s `t
 | System calls on `any360::sys` | 317 | 317 | 100% | all eight groups, opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game |
 | Graphics on `any360::gfx` (GPU features Any360 handles) | 283 | 323 | 88% | opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU |
 | Host (XEX loader, address space, threads, window, input, audio output) | 0 | 2 | 0% | ReXGlue's host runs the title; Any360 steps 13 and 14 |
-| Game functions rewritten in C++ | 19 | 58,125 | 0.03% | 0 more verified against the original in the sandbox |
-| Library functions (SDK, middleware) replaced | 7 | 16,228 | 0.04% | replaced as units, not decompiled |
+| Game functions rewritten in C++ | 22 | 58,125 | 0.04% | 0 more verified against the original in the sandbox |
+| Library functions (SDK, middleware) replaced | 8 | 16,228 | 0.05% | replaced as units, not decompiled |
 | Middleware functions (third-party physics, AI, scripting, video) | - | 7,521 | - | kept recompiled or relinked from the vendor's library, not rewritten |
-| Instructions of rewritten functions | 1,874 | 2,938,307 | 0.06% | PowerPC instructions of the original |
+| Instructions of rewritten functions | 2,277 | 2,938,307 | 0.08% | PowerPC instructions of the original |
 
 ## System calls
 
@@ -380,16 +380,16 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | Module | Kind | Functions | Instructions | Native | Verified | Still recompiled | Native share |
 |---|---|---|---|---|---|---|---|
 | XDK D3DX and XGraphics (shader compiler) | library | 10,871 | 676,089 | 0 | 0 | 10,871 | 0% |
-| code 829xxxxx | game | 9,610 | 320,385 | 2 | 0 | 9,608 | 0.02% |
+| code 829xxxxx | game | 9,610 | 320,385 | 4 | 0 | 9,606 | 0.04% |
 | Havok Physics | middleware | 6,638 | 277,751 | 1 | 0 | 6,637 | 0.02% |
 | code 827xxxxx | game | 9,003 | 270,114 | 5 | 0 | 8,998 | 0.06% |
-| code 823xxxxx | game | 8,302 | 263,273 | 2 | 0 | 8,300 | 0.02% |
+| code 823xxxxx | game | 8,302 | 263,273 | 3 | 0 | 8,299 | 0.04% |
 | code 828xxxxx | game | 8,143 | 256,060 | 1 | 0 | 8,142 | 0.01% |
 | code 822xxxxx | game | 10,170 | 208,106 | 0 | 0 | 10,170 | 0% |
 | code 826xxxxx | game | 4,753 | 121,328 | 8 | 0 | 4,745 | 0.2% |
 | code 82Axxxxx | game | 2,705 | 106,094 | 0 | 0 | 2,705 | 0% |
 | code 82Cxxxxx | game | 3,731 | 92,998 | 0 | 0 | 3,731 | 0% |
-| C runtime (CRT) | library | 1,091 | 54,874 | 3 | 0 | 1,088 | 0.3% |
+| C runtime (CRT) | library | 1,091 | 54,874 | 4 | 0 | 1,087 | 0.4% |
 | XDK audio (XAudio, XMA) | library | 1,430 | 54,273 | 0 | 0 | 1,430 | 0% |
 | XDK D3D runtime | library | 1,636 | 53,387 | 2 | 0 | 1,634 | 0.1% |
 | code 82Bxxxxx | game | 763 | 51,772 | 1 | 0 | 762 | 0.1% |
@@ -399,10 +399,11 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | XAPI (Win32 layer over the kernel and XAM) | library | 348 | 15,885 | 2 | 0 | 346 | 0.6% |
 | kernel import thunks | library | 96 | 220 | 0 | 0 | 96 | 0% |
 
-<details><summary>The 27 rewritten functions</summary>
+<details><summary>The 31 rewritten functions</summary>
 
 | Address | Module | Instructions | Handler | File |
 |---|---|---|---|---|
+| `823210B0` | code 823xxxxx | 145 | `-` | stick_watch.cpp |
 | `823462F8` | code 823xxxxx | 9 | `-` | audio.cpp |
 | `823A0C08` | code 823xxxxx | 12 | `-` | subtitles.cpp |
 | `824324A8` | XAPI (Win32 layer over the kernel and XAM) | 4 | `-` | tick_count.cpp |
@@ -422,13 +423,16 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | `827A55C0` | code 827xxxxx | 70 | `-` | frame_pacing.cpp |
 | `827C0F78` | code 827xxxxx | 1 | `-` | frame_pacing.cpp |
 | `82867D60` | code 828xxxxx | 43 | `-` | frame_pacing.cpp |
+| `8295C9C0` | code 829xxxxx | 121 | `-` | stick_watch.cpp |
+| `82960870` | code 829xxxxx | 90 | `-` | stick_watch.cpp |
 | `8299EAB8` | code 829xxxxx | 105 | `-` | physics_step.cpp |
 | `829ED8D8` | code 829xxxxx | 72 | `-` | physics_step.cpp |
-| `82A3C440` | C runtime (CRT) | 40 | `-` | crt_native.cpp |
-| `82A3CD80` | C runtime (CRT) | 265 | `-` | crt_native.cpp |
-| `82A3D1D8` | C runtime (CRT) | 42 | `-` | crt_native.cpp |
+| `82A3C440` | C runtime (CRT) | 40 | `CrtMemset` | crt_native.cpp |
+| `82A3CD80` | C runtime (CRT) | 265 | `CrtMemcpy` | crt_native.cpp |
+| `82A3D1D8` | C runtime (CRT) | 42 | `CrtCopyForward` | crt_native.cpp |
+| `82A3E2B0` | C runtime (CRT) | 47 | `CrtMemmove` | crt_native.cpp |
 | `82AA2070` | Havok Physics | 60 | `-` | physics_step.cpp |
-| `82B74110` | code 82Bxxxxx | 197 | `-` | crt_native.cpp |
+| `82B74110` | code 82Bxxxxx | 197 | `XMemCpy` | crt_native.cpp |
 | `82B766A8` | XAPI (Win32 layer over the kernel and XAM) | 3 | `-` | freecam.cpp |
 
 </details>
