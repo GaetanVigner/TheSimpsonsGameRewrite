@@ -1,5 +1,30 @@
 # The Simpsons Game Recompiled
 
+<p align="center"><img src="docs/coop-any360.jpg" width="720" alt="Bart and Homer in split-screen co-op, drawn by Any360's Vulkan renderer"/></p>
+
+<!-- progress:begin -->
+[![The Simpsons Game: rewrite progress](docs/progress/progress.svg)](docs/progress/PROGRESS.md)
+
+| | Where it stands |
+|---|---|
+| **System calls** | 317 of 317 on `any360::sys` (opt-in) |
+| **Graphics** | `any360::gfx`, a Vulkan renderer handling 283 of 323 Xbox 360 GPU features (opt-in) |
+| **Host** | ReXGlue's loader, threads and window; Any360's own host is not started |
+| **Game code** | 24 of 81,372 functions rewritten in C++ (0.03%) |
+
+Updated 2026-11-10. Every system call, module and rewritten function: [PROGRESS.md](docs/progress/PROGRESS.md). What is missing, step by step: [ROADMAP.md](docs/progress/ROADMAP.md). Function by function: [functions.csv](docs/progress/functions.csv).
+<!-- progress:end -->
+
+> **This fork** ([TheSimpsonsGameRewrite](https://github.com/GaetanVigner/TheSimpsonsGameRewrite)) follows
+> [YesterMester's port](https://github.com/YesterMester/TheSimpsonsGameRecomp) and takes it one step further: off the
+> Xbox 360 emulation layers and onto [Any360](https://github.com/GaetanVigner/Any360), until nothing of the console or
+> of the ReXGlue runtime is left under the game. The picture above is that road: green is what already runs on the
+> project's own code. Today the whole game plays with every system call on `any360::sys` and its graphics on
+> `any360::gfx` (levels, saves, sound, gamepad, split-screen co-op), as an opt-in on the branch `any360-sys-test`:
+> `--any360_gpu=true --any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`. `main` follows upstream
+> (v0.0.6.5). What is missing, in order, with the calls and functions each step needs:
+> [docs/progress/ROADMAP.md](docs/progress/ROADMAP.md).
+
 A native PC port of *The Simpsons Game* (Xbox 360, 2007) for Linux, Steam Deck and Windows, made by
 statically recompiling the original game code.
 

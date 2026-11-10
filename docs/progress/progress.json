@@ -1,0 +1,36 @@
+{
+ "title": "The Simpsons Game",
+ "date": "2026-11-10",
+ "system_calls": {
+  "total": 317,
+  "any360": 317,
+  "ready": 0,
+  "runtime": 0,
+  "stub": 0,
+  "missing": 0
+ },
+ "gpu_units": {
+  "total": 323,
+  "native": 283,
+  "bound": true
+ },
+ "functions": {
+  "total": 81874,
+  "native": 27,
+  "verified": 0,
+  "library": 499,
+  "recompiled": 81348
+ },
+ "game_functions": {
+  "total": 81372,
+  "native": 24,
+  "verified": 0
+ },
+ "instructions": {
+  "total": 2938307,
+  "native": 1874,
+  "verified": 0,
+  "library": 17851,
+  "recompiled": 2918582
+ }
+}
