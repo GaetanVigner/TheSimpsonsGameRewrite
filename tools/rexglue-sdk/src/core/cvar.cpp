@@ -18,6 +18,8 @@
 #include <CLI/CLI.hpp>
 
 #include <rex/cvar.h>
+
+#include <set>
 #include <rex/logging.h>
 
 #include <toml++/toml.hpp>
@@ -27,6 +29,11 @@ namespace rex::cvar {
 namespace {
 
 bool g_finalized = false;
+// Flags given on the command line: a config file loaded afterwards leaves them as given.
+std::set<std::string>& CommandLineFlags() {
+  static std::set<std::string> names;
+  return names;
+}
 bool g_lifecycle_override = false;
 std::mutex g_mutex;
 
@@ -73,6 +80,8 @@ void ApplyTomlTable(const toml::table& table, const std::string& prefix) {
 
     if (value.is_table()) {
       ApplyTomlTable(*value.as_table(), full_key);
+    } else if (CommandLineFlags().count(full_key)) {
+      REXLOG_DEBUG("Config: {} left as the command line gave it", full_key);
     } else {
       std::string value_str;
       if (value.is_boolean()) {
@@ -498,11 +507,18 @@ std::vector<std::string> Init(int argc, char** argv) {
     if (entry.type == FlagType::Boolean) {
       app.add_flag_function(
           "--" + entry.name + ",!--no-" + entry.name,
-          [&entry](int64_t count) { entry.setter(count > 0 ? "true" : "false"); },
+          [&entry](int64_t count) {
+            entry.setter(count > 0 ? "true" : "false");
+            CommandLineFlags().insert(entry.name);
+          },
           entry.description);
     } else {
       app.add_option_function<std::string>(
-          "--" + entry.name, [&entry](const std::string& val) { entry.setter(val); },
+          "--" + entry.name,
+          [&entry](const std::string& val) {
+            entry.setter(val);
+            CommandLineFlags().insert(entry.name);
+          },
           entry.description);
     }
   }

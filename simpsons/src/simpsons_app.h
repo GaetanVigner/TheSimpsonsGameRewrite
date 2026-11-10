@@ -6,6 +6,10 @@
 
 #include <rex/rex_app.h>
 #include <rex/runtime.h>
+#ifdef SIMPSONS_ANY360
+#include "any360/host/settings.h"
+#include "any360_graphics.h"
+#endif
 
 namespace rex::memory {
 class Memory;
@@ -43,8 +47,21 @@ class SimpsonsApp : public rex::ReXApp {
     ApplyEyeShadingOptions(runtime()->memory());
     ApplyPhysicsStepOptions(runtime()->memory());
   }
-  void OnPostSetup() override { InitFreecam(window()); }
-  void OnShutdown() override { ShutdownFreecam(window()); }
+  void OnPostSetup() override {
+    InitFreecam(window());
+#ifdef SIMPSONS_ANY360
+    simpsons::StartAny360GraphicsIfAsked();
+    // The system calls on any360::sys, the groups any360_sys_groups names (before the title's first instruction).
+    any360::host::rexglue::StartSystemFromSettings(game_data_root(), user_data_root());
+#endif
+  }
+  void OnShutdown() override {
+#ifdef SIMPSONS_ANY360
+    any360::host::rexglue::StopSystemFromSettings();
+    simpsons::StopAny360Graphics();
+#endif
+    ShutdownFreecam(window());
+  }
 
   // Override virtual hooks for customization:
   // void OnPostInitLogging() override {}

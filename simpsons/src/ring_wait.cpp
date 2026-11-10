@@ -20,6 +20,10 @@
 #include <rex/platform.h>
 #include <rex/ppc.h>
 
+#ifdef SIMPSONS_ANY360
+#include "any360/host/rexglue.h"
+#endif
+
 REXCVAR_DEFINE_BOOL(ring_wait_sleep, true, "GPU",
                     "Sleep until the GPU command processor moves on while the game waits for it "
                     "to consume its command ring, instead of spinning a CPU core (leaves power to "
@@ -63,6 +67,18 @@ REX_FUNC(sub_82452018) {
   }
   // Read before the check, so progress between the check and the wait still
   // wakes it.
+#ifdef SIMPSONS_ANY360
+  // Any360 runs the GPU: the runtime's ring never moves, so wait on Any360's progress instead (else each iteration
+  // sleeps the whole timeout: 22 FPS at 120 FPS settings).
+  if (any360::host::rexglue::GraphicsBound()) {
+    uint64_t seen = any360::host::rexglue::GpuProgress();
+    __imp__sub_82452018(ctx, base);
+    if (ctx.r3.u32 == 1) {
+      any360::host::rexglue::WaitGpuProgress(seen, kWaitTimeoutUs);
+    }
+    return;
+  }
+#endif
   uint32_t seen = rex::graphics::GetRingProgressCount();
   __imp__sub_82452018(ctx, base);
   if (ctx.r3.u32 == 1) {
