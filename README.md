@@ -20,9 +20,10 @@ Updated 2026-11-10. Every system call, module and rewritten function: [PROGRESS.
 > Xbox 360 emulation layers and onto [Any360](https://github.com/GaetanVigner/Any360), until nothing of the console or
 > of the ReXGlue runtime is left under the game. The picture above is that road: green is what already runs on the
 > project's own code. Today the whole game plays with every system call on `any360::sys` and its graphics on
-> `any360::gfx` (levels, saves, sound, gamepad, split-screen co-op), as an opt-in on the branch `any360-sys-test`:
-> `--any360_gpu=true --any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`. `main` follows upstream
-> (v0.0.6.5). What is missing, in order, with the calls and functions each step needs:
+> `any360::gfx` (levels, saves, sound, gamepad, split-screen co-op), as an opt-in: build with
+> `-DSIMPSONS_ANY360_DIR=<an Any360 checkout>` and launch with
+> `--any360_gpu=true --any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`. Without it the build
+> is upstream's (v0.0.6.5). What is missing, in order, with the calls and functions each step needs:
 > [docs/progress/ROADMAP.md](docs/progress/ROADMAP.md).
 
 A native PC port of *The Simpsons Game* (Xbox 360, 2007) for Linux, Steam Deck and Windows, made by

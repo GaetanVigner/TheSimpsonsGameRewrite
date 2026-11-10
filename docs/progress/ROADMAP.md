@@ -4,17 +4,16 @@ Generated on 2026-11-10 with [PROGRESS.md](PROGRESS.md). The rewrite is done whe
 
 ## 1. System calls on any360::sys
 
-All 317 imports run on `any360::sys` (all eight groups, opt-in: branch `any360-sys-test`, `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game).
+All 317 imports run on `any360::sys` (all eight groups, opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game).
 
 Still to do: make it the default build (today it is opt-in), then remove the ReXGlue kernel from the link.
 
 ## 2. Graphics on any360::gfx
 
-The title draws through `any360::gfx`: opt-in: branches `any360-graphics-test` and `any360-sys-test`, `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU.
+The title draws through `any360::gfx`: opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU.
 
 Still to do: make it the default renderer (today ReXGlue's Xenos emulation is), then drop the emulated GPU from the build.
 
-- Merge the Any360 branches into `main`.
 - Anti-aliasing: host MSAA smooths the game's data buffers along with its colours (false outlines), so the title runs without it (`--any360_gpu_msaa=1`); it needs MSAA that tells data from colour, or supersampling.
 
 GPU features `any360::gfx` does not handle yet (40 of 323; none stops this title today, each is one a title may need):

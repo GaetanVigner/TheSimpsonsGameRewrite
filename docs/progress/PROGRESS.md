@@ -8,8 +8,8 @@ Generated on 2026-11-10 by [Any360](https://github.com/GaetanVigner/Any360)'s `t
 
 | Axis | Done | Of | Share | Notes |
 |---|---|---|---|---|
-| System calls on `any360::sys` | 317 | 317 | 100% | all eight groups, opt-in: branch `any360-sys-test`, `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game |
-| Graphics on `any360::gfx` (GPU features Any360 handles) | 283 | 323 | 88% | opt-in: branches `any360-graphics-test` and `any360-sys-test`, `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU |
+| System calls on `any360::sys` | 317 | 317 | 100% | all eight groups, opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game |
+| Graphics on `any360::gfx` (GPU features Any360 handles) | 283 | 323 | 88% | opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU |
 | Host (XEX loader, address space, threads, window, input, audio output) | 0 | 2 | 0% | ReXGlue's host runs the title; Any360 steps 13 and 14 |
 | Game functions rewritten in C++ | 24 | 81,372 | 0.03% | 0 more verified against the original in the sandbox |
 | Library functions (SDK, middleware) replaced | 3 | 502 | 0.6% | replaced as units, not decompiled |
@@ -357,7 +357,7 @@ The 317 kernel and XAM functions the title imports, by the group a title switche
 
 ## Graphics
 
-What `any360::gfx` handles of the Xbox 360 GPU (the same for every title; a title uses a part of it). In this title: opt-in: branches `any360-graphics-test` and `any360-sys-test`, `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU.
+What `any360::gfx` handles of the Xbox 360 GPU (the same for every title; a title uses a part of it). In this title: opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU.
 
 | Family | Native | Not yet | Total |
 |---|---|---|---|
