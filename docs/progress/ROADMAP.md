@@ -62,7 +62,7 @@ Third-party middleware the game links (physics, AI, scripting, video and the lik
 
 ## 5. Game code as portable C++
 
-58,103 of 58,125 game functions are still recompiled PowerPC. The list, function by function, is [functions.csv](functions.csv) (state `recompiled` or `verified`). By module, largest first:
+58,102 of 58,125 game functions are still recompiled PowerPC. The list, function by function, is [functions.csv](functions.csv) (state `recompiled` or `verified`). By module, largest first:
 
 | Module | Functions left | Instructions left | Rewritten | Verified |
 |---|---|---|---|---|
@@ -72,7 +72,7 @@ Third-party middleware the game links (physics, AI, scripting, video and the lik
 | code 823xxxxx | 8,299 | 263,107 | 3 | 0 |
 | code 828xxxxx | 8,142 | 256,017 | 1 | 0 |
 | code 826xxxxx | 4,745 | 120,596 | 8 | 0 |
-| code 82Cxxxxx | 3,731 | 92,998 | 0 | 0 |
+| code 82Cxxxxx | 3,730 | 92,981 | 1 | 0 |
 | code 82Axxxxx | 2,705 | 106,094 | 0 | 0 |
 | code 824xxxxx | 945 | 51,037 | 0 | 0 |
 | code 82Bxxxxx | 762 | 51,575 | 1 | 0 |

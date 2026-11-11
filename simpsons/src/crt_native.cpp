@@ -87,6 +87,12 @@ ANY360_XDK_BIND(82A3EF20, CrtStrncmp)
 ANY360_XDK_BIND(82A3D280, CrtStrncpy)
 ANY360_XDK_BIND(82A428E0, CrtStrrchr)
 ANY360_XDK_BIND(82A3F030, CrtStrncat)
+// mbtowc (sub_82A5A5F0) and the strlen and strcmp built as loops of bytes (sub_82233B00, sub_823896A8) have their
+// replacements in Any360 too and are not bound: no run of the game has called them with both sides compared.
+ANY360_XDK_BIND(82CADF80, CrtWcscmp)
+// XAPI's GetLastError (sub_82433BD0) and SetLastError (sub_82433B80) have their replacements in Any360, checked here
+// with both sides compared (4,819 and 50,734 calls, none different), and are not bound: five instructions each,
+// they gain nothing as host routines.
 
 #else
 

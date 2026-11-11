@@ -11,10 +11,10 @@ Generated on 2026-11-11 by [Any360](https://github.com/GaetanVigner/Any360)'s `t
 | System calls on `any360::sys` | 317 | 317 | 100% | all eight groups, opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game |
 | Graphics on `any360::gfx` (GPU features Any360 handles) | 283 | 323 | 88% | opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU |
 | Host (XEX loader, address space, threads, window, input, audio output) | 0 | 2 | 0% | ReXGlue's host runs the title; Any360 steps 13 and 14 |
-| Game functions rewritten in C++ | 22 | 58,125 | 0.04% | 0 more verified against the original in the sandbox |
+| Game functions rewritten in C++ | 23 | 58,125 | 0.04% | 0 more verified against the original in the sandbox |
 | Library functions (SDK, middleware) replaced | 13 | 16,228 | 0.08% | replaced as units, not decompiled |
 | Middleware functions (third-party physics, AI, scripting, video) | - | 7,521 | - | kept recompiled or relinked from the vendor's library, not rewritten |
-| Instructions of rewritten functions | 2,375 | 2,938,307 | 0.08% | PowerPC instructions of the original |
+| Instructions of rewritten functions | 2,392 | 2,938,307 | 0.08% | PowerPC instructions of the original |
 
 ## System calls
 
@@ -388,7 +388,7 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | code 822xxxxx | game | 10,170 | 208,106 | 0 | 0 | 10,170 | 0% |
 | code 826xxxxx | game | 4,753 | 121,328 | 8 | 0 | 4,745 | 0.2% |
 | code 82Axxxxx | game | 2,705 | 106,094 | 0 | 0 | 2,705 | 0% |
-| code 82Cxxxxx | game | 3,731 | 92,998 | 0 | 0 | 3,731 | 0% |
+| code 82Cxxxxx | game | 3,731 | 92,998 | 1 | 0 | 3,730 | 0.03% |
 | C runtime (CRT) | library | 1,091 | 54,874 | 9 | 0 | 1,082 | 0.8% |
 | XDK audio (XAudio, XMA) | library | 1,430 | 54,273 | 0 | 0 | 1,430 | 0% |
 | XDK D3D runtime | library | 1,636 | 53,387 | 2 | 0 | 1,634 | 0.1% |
@@ -399,7 +399,7 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | XAPI (Win32 layer over the kernel and XAM) | library | 348 | 15,885 | 2 | 0 | 346 | 0.6% |
 | kernel import thunks | library | 96 | 220 | 0 | 0 | 96 | 0% |
 
-<details><summary>The 36 rewritten functions</summary>
+<details><summary>The 37 rewritten functions</summary>
 
 | Address | Module | Instructions | Handler | File |
 |---|---|---|---|---|
@@ -439,6 +439,7 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | `82AA2070` | Havok Physics | 60 | `-` | physics_step.cpp |
 | `82B74110` | code 82Bxxxxx | 197 | `XMemCpy` | crt_native.cpp |
 | `82B766A8` | XAPI (Win32 layer over the kernel and XAM) | 3 | `-` | freecam.cpp |
+| `82CADF80` | code 82Cxxxxx | 17 | `CrtWcscmp` | crt_native.cpp |
 
 </details>
 

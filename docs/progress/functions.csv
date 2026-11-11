@@ -80269,7 +80269,7 @@ address,module,kind,instructions,state,handler,file
 82CADEF4,code 82Cxxxxx,game,19,recompiled,,
 82CADF40,code 82Cxxxxx,game,13,recompiled,,
 82CADF78,code 82Cxxxxx,game,2,recompiled,,
-82CADF80,code 82Cxxxxx,game,17,recompiled,,
+82CADF80,code 82Cxxxxx,game,17,native,CrtWcscmp,crt_native.cpp
 82CADFC8,code 82Cxxxxx,game,23,recompiled,,
 82CAE028,code 82Cxxxxx,game,49,recompiled,,
 82CAE0F0,code 82Cxxxxx,game,95,recompiled,,
