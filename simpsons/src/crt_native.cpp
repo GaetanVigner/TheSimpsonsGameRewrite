@@ -79,11 +79,14 @@ ANY360_XDK_BIND(82A3D1D8, CrtCopyForward)
 ANY360_XDK_BIND(82A3E2B0, CrtMemmove)
 // The XDK's vector copy; kCopyByteStep is the global its byte loop subtracts from the count (1).
 ANY360_XDK_BIND_WITH(82B74110, XMemCpy, kCopyByteStep)
-// The C runtime's strchr, strncmp and strncpy. (wcslen, sub_82A3FED0, has the same replacement in Any360; it is
-// not bound until a run of the game has called it with both sides compared.)
+// The C runtime's string functions. wcslen (sub_82A3FED0), wcscpy (sub_82A41268), wcsncpy (sub_82CADFC8), tolower
+// (sub_826BE740) and toupper (sub_827418C0) have the same replacements in Any360 and are not bound: no run of the
+// game has called them with both sides compared.
 ANY360_XDK_BIND(82A3FE90, CrtStrchr)
 ANY360_XDK_BIND(82A3EF20, CrtStrncmp)
 ANY360_XDK_BIND(82A3D280, CrtStrncpy)
+ANY360_XDK_BIND(82A428E0, CrtStrrchr)
+ANY360_XDK_BIND(82A3F030, CrtStrncat)
 
 #else
 

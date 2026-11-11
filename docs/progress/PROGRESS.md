@@ -1,6 +1,6 @@
 # The Simpsons Game: rewrite progress
 
-Generated on 2026-11-10 by [Any360](https://github.com/GaetanVigner/Any360)'s `tools/title_progress.py`. What is still missing, step by step: [ROADMAP.md](ROADMAP.md). Every function: [functions.csv](functions.csv). Counts: [progress.json](progress.json).
+Generated on 2026-11-11 by [Any360](https://github.com/GaetanVigner/Any360)'s `tools/title_progress.py`. What is still missing, step by step: [ROADMAP.md](ROADMAP.md). Every function: [functions.csv](functions.csv). Counts: [progress.json](progress.json).
 
 ![Progress](progress.svg)
 
@@ -12,9 +12,9 @@ Generated on 2026-11-10 by [Any360](https://github.com/GaetanVigner/Any360)'s `t
 | Graphics on `any360::gfx` (GPU features Any360 handles) | 283 | 323 | 88% | opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU |
 | Host (XEX loader, address space, threads, window, input, audio output) | 0 | 2 | 0% | ReXGlue's host runs the title; Any360 steps 13 and 14 |
 | Game functions rewritten in C++ | 22 | 58,125 | 0.04% | 0 more verified against the original in the sandbox |
-| Library functions (SDK, middleware) replaced | 8 | 16,228 | 0.05% | replaced as units, not decompiled |
+| Library functions (SDK, middleware) replaced | 13 | 16,228 | 0.08% | replaced as units, not decompiled |
 | Middleware functions (third-party physics, AI, scripting, video) | - | 7,521 | - | kept recompiled or relinked from the vendor's library, not rewritten |
-| Instructions of rewritten functions | 2,277 | 2,938,307 | 0.08% | PowerPC instructions of the original |
+| Instructions of rewritten functions | 2,375 | 2,938,307 | 0.08% | PowerPC instructions of the original |
 
 ## System calls
 
@@ -389,7 +389,7 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | code 826xxxxx | game | 4,753 | 121,328 | 8 | 0 | 4,745 | 0.2% |
 | code 82Axxxxx | game | 2,705 | 106,094 | 0 | 0 | 2,705 | 0% |
 | code 82Cxxxxx | game | 3,731 | 92,998 | 0 | 0 | 3,731 | 0% |
-| C runtime (CRT) | library | 1,091 | 54,874 | 4 | 0 | 1,087 | 0.4% |
+| C runtime (CRT) | library | 1,091 | 54,874 | 9 | 0 | 1,082 | 0.8% |
 | XDK audio (XAudio, XMA) | library | 1,430 | 54,273 | 0 | 0 | 1,430 | 0% |
 | XDK D3D runtime | library | 1,636 | 53,387 | 2 | 0 | 1,634 | 0.1% |
 | code 82Bxxxxx | game | 763 | 51,772 | 1 | 0 | 762 | 0.1% |
@@ -399,7 +399,7 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | XAPI (Win32 layer over the kernel and XAM) | library | 348 | 15,885 | 2 | 0 | 346 | 0.6% |
 | kernel import thunks | library | 96 | 220 | 0 | 0 | 96 | 0% |
 
-<details><summary>The 31 rewritten functions</summary>
+<details><summary>The 36 rewritten functions</summary>
 
 | Address | Module | Instructions | Handler | File |
 |---|---|---|---|---|
@@ -430,7 +430,12 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | `82A3C440` | C runtime (CRT) | 40 | `CrtMemset` | crt_native.cpp |
 | `82A3CD80` | C runtime (CRT) | 265 | `CrtMemcpy` | crt_native.cpp |
 | `82A3D1D8` | C runtime (CRT) | 42 | `CrtCopyForward` | crt_native.cpp |
+| `82A3D280` | C runtime (CRT) | 23 | `CrtStrncpy` | crt_native.cpp |
 | `82A3E2B0` | C runtime (CRT) | 47 | `CrtMemmove` | crt_native.cpp |
+| `82A3EF20` | C runtime (CRT) | 19 | `CrtStrncmp` | crt_native.cpp |
+| `82A3F030` | C runtime (CRT) | 19 | `CrtStrncat` | crt_native.cpp |
+| `82A3FE90` | C runtime (CRT) | 15 | `CrtStrchr` | crt_native.cpp |
+| `82A428E0` | C runtime (CRT) | 22 | `CrtStrrchr` | crt_native.cpp |
 | `82AA2070` | Havok Physics | 60 | `-` | physics_step.cpp |
 | `82B74110` | code 82Bxxxxx | 197 | `XMemCpy` | crt_native.cpp |
 | `82B766A8` | XAPI (Win32 layer over the kernel and XAM) | 3 | `-` | freecam.cpp |

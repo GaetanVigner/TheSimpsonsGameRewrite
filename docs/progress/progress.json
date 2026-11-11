@@ -1,6 +1,6 @@
 {
  "title": "The Simpsons Game",
- "date": "2026-11-10",
+ "date": "2026-11-11",
  "system_calls": {
   "total": 317,
   "any360": 317,
@@ -16,9 +16,9 @@
  },
  "functions": {
   "total": 81874,
-  "native": 31,
+  "native": 36,
   "verified": 0,
-  "library": 16220,
+  "library": 16215,
   "middleware": 7520,
   "recompiled": 58103
  },
@@ -29,9 +29,9 @@
  },
  "instructions": {
   "total": 2938307,
-  "native": 2277,
+  "native": 2375,
   "verified": 0,
-  "library": 884670,
+  "library": 884572,
   "middleware": 311865,
   "recompiled": 1739495
  }

@@ -1,6 +1,6 @@
 # The Simpsons Game: roadmap
 
-Generated on 2026-11-10 with [PROGRESS.md](PROGRESS.md). The rewrite is done when nothing of the Xbox 360 or of ReXGlue's runtime is left under the game: every system call on `any360::sys`, graphics on `any360::gfx`, Any360 as the host, and the game's code as portable C++. Steps are in working order; each lists what it still needs.
+Generated on 2026-11-11 with [PROGRESS.md](PROGRESS.md). The rewrite is done when nothing of the Xbox 360 or of ReXGlue's runtime is left under the game: every system call on `any360::sys`, graphics on `any360::gfx`, Any360 as the host, and the game's code as portable C++. Steps are in working order; each lists what it still needs.
 
 ## 1. System calls on any360::sys
 
@@ -46,7 +46,7 @@ SDK code linked into the executable is not decompiled: Any360 provides the same 
 | Library range | Functions | Instructions | Replaced | Verified in the sandbox | Left |
 |---|---|---|---|---|---|
 | XDK D3DX and XGraphics (shader compiler) | 10,871 | 676,089 | 0 | 0 | 10,871 |
-| C runtime (CRT) | 1,091 | 54,874 | 4 | 0 | 1,087 |
+| C runtime (CRT) | 1,091 | 54,874 | 9 | 0 | 1,082 |
 | XDK audio (XAudio, XMA) | 1,430 | 54,273 | 0 | 0 | 1,430 |
 | XDK D3D runtime | 1,636 | 53,387 | 2 | 0 | 1,634 |
 | XDK Xbox Live and voice (XOnline, XHV) | 756 | 30,487 | 0 | 0 | 756 |
@@ -88,3 +88,4 @@ Order of work: symbol recovery and library recognition first (they shrink this l
 
 - Above 60 FPS the camera (right stick) barely turns: the title's camera logic, not the input path (every other input is right).
 - Loading screens and the heaviest scenes drop to 21-25 FPS: bound by the game's own CPU thread, not by the renderer (1-3 ms a frame).
+- On some launches the menus and loading screens run at 22 FPS instead of 30 with the window shown (7 launches of 11; never minimized; levels keep 60): the renderer's thread waits in the presentation of each frame. Not looked into yet.

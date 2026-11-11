@@ -64987,7 +64987,7 @@ address,module,kind,instructions,state,handler,file
 82A3CD54,C runtime (CRT),library,8,library,,
 82A3CD80,C runtime (CRT),library,265,native,CrtMemcpy,crt_native.cpp
 82A3D1D8,C runtime (CRT),library,42,native,CrtCopyForward,crt_native.cpp
-82A3D280,C runtime (CRT),library,23,library,,
+82A3D280,C runtime (CRT),library,23,native,CrtStrncpy,crt_native.cpp
 82A3D2E0,C runtime (CRT),library,14,library,,
 82A3D318,C runtime (CRT),library,44,library,,
 82A3D3C8,C runtime (CRT),library,242,library,,
@@ -65026,10 +65026,10 @@ address,module,kind,instructions,state,handler,file
 82A3ED40,C runtime (CRT),library,23,library,,
 82A3EDA0,C runtime (CRT),library,22,library,,
 82A3EDF8,C runtime (CRT),library,72,library,,
-82A3EF20,C runtime (CRT),library,19,library,,
+82A3EF20,C runtime (CRT),library,19,native,CrtStrncmp,crt_native.cpp
 82A3EF70,C runtime (CRT),library,15,library,,
 82A3EFB0,C runtime (CRT),library,31,library,,
-82A3F030,C runtime (CRT),library,19,library,,
+82A3F030,C runtime (CRT),library,19,native,CrtStrncat,crt_native.cpp
 82A3F080,C runtime (CRT),library,59,library,,
 82A3F170,C runtime (CRT),library,17,library,,
 82A3F1B8,C runtime (CRT),library,18,library,,
@@ -65061,7 +65061,7 @@ address,module,kind,instructions,state,handler,file
 82A3FB68,C runtime (CRT),library,162,library,,
 82A3FDF0,C runtime (CRT),library,24,library,,
 82A3FE50,C runtime (CRT),library,15,library,,
-82A3FE90,C runtime (CRT),library,15,library,,
+82A3FE90,C runtime (CRT),library,15,native,CrtStrchr,crt_native.cpp
 82A3FED0,C runtime (CRT),library,9,library,,
 82A3FEF8,C runtime (CRT),library,2,library,,
 82A3FF00,C runtime (CRT),library,15,library,,
@@ -65169,7 +65169,7 @@ address,module,kind,instructions,state,handler,file
 82A42718,C runtime (CRT),library,62,library,,
 82A42810,C runtime (CRT),library,50,library,,
 82A428D8,C runtime (CRT),library,2,library,,
-82A428E0,C runtime (CRT),library,22,library,,
+82A428E0,C runtime (CRT),library,22,native,CrtStrrchr,crt_native.cpp
 82A42938,C runtime (CRT),library,37,library,,
 82A429D0,C runtime (CRT),library,15,library,,
 82A42A10,C runtime (CRT),library,2,library,,
