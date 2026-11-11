@@ -1202,7 +1202,7 @@
 <rect x="577.2" y="530.8" width="14.6" height="10.7" fill="#8957e5"/>
 <rect x="592.3" y="530.8" width="14.6" height="10.7" fill="#8957e5"/>
 <rect x="546.9" y="542.1" width="14.6" height="10.7" fill="#8957e5"/>
-<rect x="546.9" y="497.1" width="60.6" height="56.3" fill="none" stroke="#0d1117" stroke-width="2"><title>C runtime (CRT): 9 native, 1,082 library</title></rect>
+<rect x="546.9" y="497.1" width="60.6" height="56.3" fill="none" stroke="#0d1117" stroke-width="2"><title>C runtime (CRT): 11 native, 1,080 library</title></rect>
 <rect x="607.5" y="497.1" width="12.5" height="13.5" fill="#30363d"/>
 <rect x="620.6" y="497.1" width="12.5" height="13.5" fill="#30363d"/>
 <rect x="633.7" y="497.1" width="12.5" height="13.5" fill="#30363d"/>

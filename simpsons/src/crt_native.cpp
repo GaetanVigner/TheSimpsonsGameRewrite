@@ -87,6 +87,8 @@ ANY360_XDK_BIND(82A3EF20, CrtStrncmp)
 ANY360_XDK_BIND(82A3D280, CrtStrncpy)
 ANY360_XDK_BIND(82A428E0, CrtStrrchr)
 ANY360_XDK_BIND(82A3F030, CrtStrncat)
+ANY360_XDK_BIND(82A419A0, CrtStricmp)
+ANY360_XDK_BIND(82A3EFB0, CrtStrstr)
 // mbtowc (sub_82A5A5F0) has its replacement in Any360 too and is not bound: no run of the game has called it with
 // both sides compared. The strlen and strcmp built as loops of bytes (sub_82233B00, sub_823896A8) are Havok's own:
 // middleware stays as it is, they are not bound.

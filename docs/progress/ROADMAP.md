@@ -46,7 +46,7 @@ SDK code linked into the executable is not decompiled: Any360 provides the same 
 | Library range | Functions | Instructions | Replaced | Verified in the sandbox | Left |
 |---|---|---|---|---|---|
 | XDK D3DX and XGraphics (shader compiler) | 10,871 | 676,089 | 0 | 0 | 10,871 |
-| C runtime (CRT) | 1,091 | 54,874 | 9 | 0 | 1,082 |
+| C runtime (CRT) | 1,091 | 54,874 | 11 | 0 | 1,080 |
 | XDK audio (XAudio, XMA) | 1,430 | 54,273 | 0 | 0 | 1,430 |
 | XDK D3D runtime | 1,636 | 53,387 | 2 | 0 | 1,634 |
 | XDK Xbox Live and voice (XOnline, XHV) | 756 | 30,487 | 0 | 0 | 756 |

@@ -65028,7 +65028,7 @@ address,module,kind,instructions,state,handler,file
 82A3EDF8,C runtime (CRT),library,72,library,,
 82A3EF20,C runtime (CRT),library,19,native,CrtStrncmp,crt_native.cpp
 82A3EF70,C runtime (CRT),library,15,library,,
-82A3EFB0,C runtime (CRT),library,31,library,,
+82A3EFB0,C runtime (CRT),library,31,native,CrtStrstr,crt_native.cpp
 82A3F030,C runtime (CRT),library,19,native,CrtStrncat,crt_native.cpp
 82A3F080,C runtime (CRT),library,59,library,,
 82A3F170,C runtime (CRT),library,17,library,,
@@ -65124,7 +65124,7 @@ address,module,kind,instructions,state,handler,file
 82A41760,C runtime (CRT),library,24,library,,
 82A417C0,C runtime (CRT),library,74,library,,
 82A418E8,C runtime (CRT),library,43,library,,
-82A419A0,C runtime (CRT),library,21,library,,
+82A419A0,C runtime (CRT),library,21,native,CrtStricmp,crt_native.cpp
 82A419F8,C runtime (CRT),library,35,library,,
 82A41A88,C runtime (CRT),library,16,library,,
 82A41AC8,C runtime (CRT),library,15,library,,
