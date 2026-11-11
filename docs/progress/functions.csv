@@ -65181,7 +65181,7 @@ address,module,kind,instructions,state,handler,file
 82A42AE0,C runtime (CRT),library,1,library,,
 82A42AE8,C runtime (CRT),library,68,library,,
 82A42BF8,C runtime (CRT),library,164,library,,
-82A42E88,C runtime (CRT),library,8,library,,
+82A42E88,C runtime (CRT),library,8,native,CrtFinite,crt_native.cpp
 82A42EA8,C runtime (CRT),library,17,library,,
 82A42EF0,C runtime (CRT),library,53,library,,
 82A42FC8,C runtime (CRT),library,95,library,,
@@ -65199,8 +65199,8 @@ address,module,kind,instructions,state,handler,file
 82A437C0,C runtime (CRT),library,113,library,,
 82A43988,C runtime (CRT),library,9,library,,
 82A439B0,C runtime (CRT),library,97,library,,
-82A43B38,C runtime (CRT),library,6,library,,
-82A43B50,C runtime (CRT),library,10,library,,
+82A43B38,C runtime (CRT),library,6,native,CrtGetExp,crt_native.cpp
+82A43B50,C runtime (CRT),library,10,native,CrtSetExp,crt_native.cpp
 82A43B78,C runtime (CRT),library,56,library,,
 82A43C58,C runtime (CRT),library,54,library,,
 82A43D30,C runtime (CRT),library,70,library,,
@@ -65370,8 +65370,8 @@ address,module,kind,instructions,state,handler,file
 82A48A80,C runtime (CRT),library,17,library,,
 82A48AC8,C runtime (CRT),library,11,library,,
 82A48AF8,C runtime (CRT),library,3,library,,
-82A48B08,C runtime (CRT),library,10,library,,
-82A48B30,C runtime (CRT),library,6,library,,
+82A48B08,C runtime (CRT),library,10,native,CrtSetExp,crt_native.cpp
+82A48B30,C runtime (CRT),library,6,native,CrtGetExp,crt_native.cpp
 82A48B48,C runtime (CRT),library,13,library,,
 82A48B80,C runtime (CRT),library,9,library,,
 82A48BA8,C runtime (CRT),library,33,library,,
