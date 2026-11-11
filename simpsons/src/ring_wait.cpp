@@ -21,7 +21,7 @@
 #include <rex/ppc.h>
 
 #ifdef SIMPSONS_ANY360
-#include "any360/host/rexglue.h"
+#include "any360/host/xdk_natives.h"
 #endif
 
 REXCVAR_DEFINE_BOOL(ring_wait_sleep, true, "GPU",
@@ -65,20 +65,16 @@ REX_FUNC(sub_82452018) {
         LoadGuestU32(base, device + kDeviceReadPointerAddress),
         rex::graphics::GetReadPointerWritebackAddress());
   }
-  // Read before the check, so progress between the check and the wait still
-  // wakes it.
 #ifdef SIMPSONS_ANY360
-  // Any360 runs the GPU: the runtime's ring never moves, so wait on Any360's progress instead (else each iteration
-  // sleeps the whole timeout: 22 FPS at 120 FPS settings).
+  // Any360 runs the GPU: the runtime's ring never moves. The step is Any360's D3D GPU wait step, shared by the
+  // titles (it sleeps on Any360's GPU progress; any360_d3d_wait_sleep).
   if (any360::host::rexglue::GraphicsBound()) {
-    uint64_t seen = any360::host::rexglue::GpuProgress();
-    __imp__sub_82452018(ctx, base);
-    if (ctx.r3.u32 == 1) {
-      any360::host::rexglue::WaitGpuProgress(seen, kWaitTimeoutUs);
-    }
+    any360::host::rexglue::xdk::D3dGpuWaitStep(ctx, base, &__imp__sub_82452018);
     return;
   }
 #endif
+  // Read before the check, so progress between the check and the wait still
+  // wakes it.
   uint32_t seen = rex::graphics::GetRingProgressCount();
   __imp__sub_82452018(ctx, base);
   if (ctx.r3.u32 == 1) {
