@@ -104,6 +104,9 @@ ANY360_XDK_BIND(82CADF80, CrtWcscmp)
 // XAPI's GetLastError (sub_82433BD0) and SetLastError (sub_82433B80) have their replacements in Any360, checked here
 // with both sides compared (4,819 and 50,734 calls, none different), and are not bound: five instructions each,
 // they gain nothing as host routines.
+// XAudio's fill of a block's buffer with its value (sub_82C6E9A8, sub_82C6E870, sub_82C6EA10, sub_82C6E940,
+// sub_82C6EA78: 256 to 4096 floats) has its replacement in Any360 too and is not bound: no run of the game has called
+// it with both sides compared.
 
 #else
 
