@@ -107,6 +107,12 @@ ANY360_XDK_BIND(82CADF80, CrtWcscmp)
 // XAudio's fill of a block's buffer with its value (sub_82C6E9A8, sub_82C6E870, sub_82C6EA10, sub_82C6E940,
 // sub_82C6EA78: 256 to 4096 floats) has its replacement in Any360 too and is not bound: no run of the game has called
 // it with both sides compared.
+// zlib 1.1.4's inflate_fast (sub_82C16628) and libpng 1.0.5's png_read_filter_row (sub_82BFA728) have their
+// replacements in Any360 too (the same instructions as Crackdown's copies; this build's mask table is zlib's
+// standard one, its messages its own) and are not bound: here they are D3DX's, under its texture loader, which the
+// game reaches only from two loaders of its own (sub_827225C0, xenon_util.cpp; sub_826FF0F8), and no run has
+// called them: tools/any360-ab.ps1 with tools/any360-route.txt (the title screen into the first level, 6 minutes)
+// called neither.
 
 #else
 
