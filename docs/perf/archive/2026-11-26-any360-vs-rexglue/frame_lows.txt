@@ -1,0 +1,17 @@
+<route> 5 launches
+  simpsons_008.log: dip 1% low 486 FPS, slowest 23.3 ms, 1 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 767-864
+  simpsons_010.log: dip 1% low 588 FPS, slowest 3.1 ms, 0 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 800-887
+  simpsons_012.log: dip 1% low 536 FPS, slowest 3.9 ms, 0 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 801-882
+  simpsons_014.log: dip 1% low 547 FPS, slowest 3.4 ms, 0 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 799-881
+  simpsons_016.log: dip 1% low 565 FPS, slowest 3.2 ms, 0 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 798-884
+  steady (135 periods): FPS mean 815.7 (median 809.2, min 767.3), 10% low mean 725.9 (median 730.0, min 643.4), 1% low mean 598.0 (median 600.7, min 492.2); process private memory mean 2800 MB, max 2842 MB
+  dips (5): 1% low mean 544.3, slowest frame mean 7.4 ms, over 16.7 ms mean 0.2, texture loading mean 0.00 ms a frame
+@rexglue: 5 launches
+  simpsons_009.log: dip 1% low 337 FPS, slowest 52.2 ms, 1 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 663-749
+  simpsons_011.log: dip 1% low 320 FPS, slowest 42.1 ms, 1 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 650-743
+  simpsons_013.log: dip 1% low 346 FPS, slowest 51.5 ms, 2 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 693-753
+  simpsons_015.log: dip 1% low 321 FPS, slowest 50.7 ms, 1 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 674-743
+  simpsons_017.log: dip 1% low 341 FPS, slowest 51.8 ms, 1 over 16.7 ms, texture loading up to 0.00 ms a frame; steady FPS 680-748
+  steady (270 periods): FPS mean 727.3 (median 731.9, min 650.4), 10% low mean 659.7 (median 679.0, min 424.2), 1% low mean 404.4 (median 402.0, min 323.9); process private memory mean 1703 MB, max 1729 MB
+  dips (5): 1% low mean 333.2, slowest frame mean 49.7 ms, over 16.7 ms mean 1.2, texture loading mean 0.00 ms a frame
+<route> against @rexglue: steady fps z +16.41, p10 z +15.67, p1 z +16.41; dips 1% low z +2.61, slowest z -2.61

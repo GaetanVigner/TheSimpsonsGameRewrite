@@ -34,6 +34,8 @@ REXCVAR_DEFINE_INT32(any360_gpu_spin, -1, "GPU",
 REXCVAR_DEFINE_STRING(any360_gpu_capture, "", "GPU",
                       "Any360: a frame capture file for gfx_replay, written when <file>.go appears (empty: none)");
 REXCVAR_DEFINE_INT32(any360_gpu_capture_kicks, 60, "GPU", "Any360: ring kicks a capture records");
+REXCVAR_DEFINE_STRING(any360_gpu_screenshot, "", "GPU",
+                      "Any360: a PNG of the next presented frame, written when <file>.go appears (empty: none)");
 
 // The GPU system calls, overridden in the executable: the runtime's until StartGraphics succeeds, Any360's after.
 // The game does not hook VdSwap itself, so it is bound here too.
@@ -68,6 +70,7 @@ void StartAny360GraphicsIfAsked() {
 #endif
 #ifdef ANY360_REXGLUE_SHOW_FPS
 #endif
+  options.screenshot_path = REXCVAR_GET(any360_gpu_screenshot);
   options.log = [](const std::string& line) { REXLOG_INFO("{}", line); };
   std::string error;
   if (any360::host::rexglue::StartGraphics(options, error)) {

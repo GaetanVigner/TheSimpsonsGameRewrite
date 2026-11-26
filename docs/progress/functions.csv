@@ -11962,7 +11962,7 @@ address,module,kind,instructions,state,handler,file
 82321000,code 823xxxxx,game,8,recompiled,,
 82321020,code 823xxxxx,game,31,recompiled,,
 823210A0,code 823xxxxx,game,4,recompiled,,
-823210B0,code 823xxxxx,game,145,native,,stick_watch.cpp
+823210B0,code 823xxxxx,game,145,recompiled,,
 823212F8,code 823xxxxx,game,87,recompiled,,
 82321458,code 823xxxxx,game,25,recompiled,,
 823214C0,code 823xxxxx,game,40,recompiled,,
@@ -56872,7 +56872,7 @@ address,module,kind,instructions,state,handler,file
 8295C108,code 829xxxxx,game,97,recompiled,,
 8295C290,code 829xxxxx,game,330,recompiled,,
 8295C7B8,code 829xxxxx,game,129,recompiled,,
-8295C9C0,code 829xxxxx,game,121,native,,stick_watch.cpp
+8295C9C0,code 829xxxxx,game,121,native,,camera_stick.cpp
 8295CBA8,code 829xxxxx,game,46,recompiled,,
 8295CC60,code 829xxxxx,game,115,recompiled,,
 8295CE30,code 829xxxxx,game,115,recompiled,,
@@ -57004,7 +57004,7 @@ address,module,kind,instructions,state,handler,file
 82960670,code 829xxxxx,game,29,recompiled,,
 829606E8,code 829xxxxx,game,20,recompiled,,
 82960738,code 829xxxxx,game,78,recompiled,,
-82960870,code 829xxxxx,game,90,native,,stick_watch.cpp
+82960870,code 829xxxxx,game,90,native,,camera_stick.cpp
 829609D8,code 829xxxxx,game,34,recompiled,,
 82960A60,code 829xxxxx,game,3,recompiled,,
 82960A70,code 829xxxxx,game,5,recompiled,,

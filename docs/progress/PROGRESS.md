@@ -1,6 +1,6 @@
 # The Simpsons Game: rewrite progress
 
-Generated on 2026-11-16 by [Any360](https://github.com/GaetanVigner/Any360)'s `tools/title_progress.py`. What is still missing, step by step: [ROADMAP.md](ROADMAP.md). Every function: [functions.csv](functions.csv). Counts: [progress.json](progress.json).
+Generated on 2026-11-26 by [Any360](https://github.com/GaetanVigner/Any360)'s `tools/title_progress.py`. What is still missing, step by step: [ROADMAP.md](ROADMAP.md). Every function: [functions.csv](functions.csv). Counts: [progress.json](progress.json).
 
 ![Progress](progress.svg)
 
@@ -11,10 +11,10 @@ Generated on 2026-11-16 by [Any360](https://github.com/GaetanVigner/Any360)'s `t
 | System calls on `any360::sys` | 317 | 317 | 100% | all eight groups, opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_sys_groups=stateless,files,objects,threads,memory,xam,input,audio`; levels, saves, sound and gamepad checked in game |
 | Graphics on `any360::gfx` (GPU features Any360 handles) | 283 | 323 | 88% | opt-in on `main` (built with `SIMPSONS_ANY360_DIR`): `--any360_gpu=true`; 60 FPS in gameplay and 30 on menus and loading screens (the game's own pacing), as with the runtime's GPU |
 | Host (XEX loader, address space, threads, window, input, audio output) | 0 | 2 | 0% | ReXGlue's host runs the title; Any360 steps 13 and 14 |
-| Game functions rewritten in C++ | 23 | 58,125 | 0.04% | 0 more verified against the original in the sandbox |
+| Game functions rewritten in C++ | 22 | 58,125 | 0.04% | 0 more verified against the original in the sandbox |
 | Library functions (SDK, middleware) replaced | 20 | 16,228 | 0.1% | replaced as units, not decompiled |
 | Middleware functions (third-party physics, AI, scripting, video) | - | 7,521 | - | kept recompiled or relinked from the vendor's library, not rewritten |
-| Instructions of rewritten functions | 2,484 | 2,938,307 | 0.08% | PowerPC instructions of the original |
+| Instructions of rewritten functions | 2,339 | 2,938,307 | 0.08% | PowerPC instructions of the original |
 
 ## System calls
 
@@ -383,7 +383,7 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | code 829xxxxx | game | 9,610 | 320,385 | 4 | 0 | 9,606 | 0.04% |
 | Havok Physics | middleware | 6,638 | 277,751 | 1 | 0 | 6,637 | 0.02% |
 | code 827xxxxx | game | 9,003 | 270,114 | 5 | 0 | 8,998 | 0.06% |
-| code 823xxxxx | game | 8,302 | 263,273 | 3 | 0 | 8,299 | 0.04% |
+| code 823xxxxx | game | 8,302 | 263,273 | 2 | 0 | 8,300 | 0.02% |
 | code 828xxxxx | game | 8,143 | 256,060 | 1 | 0 | 8,142 | 0.01% |
 | code 822xxxxx | game | 10,170 | 208,106 | 0 | 0 | 10,170 | 0% |
 | code 826xxxxx | game | 4,753 | 121,328 | 8 | 0 | 4,745 | 0.2% |
@@ -399,11 +399,10 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | XAPI (Win32 layer over the kernel and XAM) | library | 348 | 15,885 | 2 | 0 | 346 | 0.6% |
 | kernel import thunks | library | 96 | 220 | 0 | 0 | 96 | 0% |
 
-<details><summary>The 44 rewritten functions</summary>
+<details><summary>The 43 rewritten functions</summary>
 
 | Address | Module | Instructions | Handler | File |
 |---|---|---|---|---|
-| `823210B0` | code 823xxxxx | 145 | `-` | stick_watch.cpp |
 | `823462F8` | code 823xxxxx | 9 | `-` | audio.cpp |
 | `823A0C08` | code 823xxxxx | 12 | `-` | subtitles.cpp |
 | `824324A8` | XAPI (Win32 layer over the kernel and XAM) | 4 | `-` | tick_count.cpp |
@@ -423,8 +422,8 @@ Every function of the executable by module (named address ranges; the rest by 1 
 | `827A55C0` | code 827xxxxx | 70 | `-` | frame_pacing.cpp |
 | `827C0F78` | code 827xxxxx | 1 | `-` | frame_pacing.cpp |
 | `82867D60` | code 828xxxxx | 43 | `-` | frame_pacing.cpp |
-| `8295C9C0` | code 829xxxxx | 121 | `-` | stick_watch.cpp |
-| `82960870` | code 829xxxxx | 90 | `-` | stick_watch.cpp |
+| `8295C9C0` | code 829xxxxx | 121 | `-` | camera_stick.cpp |
+| `82960870` | code 829xxxxx | 90 | `-` | camera_stick.cpp |
 | `8299EAB8` | code 829xxxxx | 105 | `-` | physics_step.cpp |
 | `829ED8D8` | code 829xxxxx | 72 | `-` | physics_step.cpp |
 | `82A3C440` | C runtime (CRT) | 40 | `CrtMemset` | crt_native.cpp |
@@ -459,7 +458,7 @@ Any360's own steps towards hosting a title without ReXGlue's runtime ([Any360 RE
 | 9 | no call reaching the runtime: every path, the raw hard drive devices, the profile defaults on `any360::sys` | done (Crackdown; the host stays ReXGlue's until step 13) |
 | 10 | a second title (The Simpsons Game) on the full system binding | done (all groups, levels, saves, sound, gamepad) |
 | 11 | third and fourth titles (Test Drive Unlimited, Sonic 06) | partial: Test Drive Unlimited boots to its title screen with all eight groups on `any360::sys` and no call reaching the runtime; gameplay, saves and sound not checked yet; Sonic 06 not started |
-| 12 | paths no title took yet: `XMA*` decoding, STFS packages, several users, guide UIs, Live offline, xbdm | partial: 602 of 2,914 exports native with scenario tests, none of the 2,294 reference stubs sorted |
+| 12 | paths no title took yet: `XMA*` decoding, STFS packages, several users, guide UIs, Live offline, xbdm | partial: 850 of 2,914 exports native with scenario tests; the reference stubs sorted ([docs/SYS_STUBS.md](https://github.com/GaetanVigner/Any360/blob/main/docs/SYS_STUBS.md)): none left to implement, all 114 Xenia stubs too answered natively (avatars, media, profile and user, content, information, Kinect, settings and others, guide screens, modules, input, network and notifications, the SMC and the last ones) (2 object and module calls, 10 content, network, callback and thread look-up calls, 9 language, memory, Xapi, IPTV and LZX decompression calls, 24 cryptography and key calls, 14 Win32 forms, 19 XAM information calls, 11 kernel calls, 16 guide and Kinect calls and 17 profile calls done), 255 debug only, 1,799 never seen |
 | 13 | Any360's own host: XEX loader, address space, threads, guest dispatch, MMIO, devices | not started |
 | 14 | the platform layer: window, input, audio, presenter on Windows and Linux (Steam Deck) | partial: SDL3 audio output only |
 | 15 | graphics through `any360::gfx` only, no `rexgpu-xenos` | partial: three titles draw through `any360::gfx`, the GPU session's plan in [docs/GFX.md](https://github.com/GaetanVigner/Any360/blob/main/docs/GFX.md) |

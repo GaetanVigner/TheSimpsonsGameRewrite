@@ -8,6 +8,21 @@
 
 **No game data and no game binaries are here.** You need your own copy of the Xbox 360 game; the game runs only with data installed from an ISO of your own disc.
 
+## Any360 against ReXGlue
+
+> **In the first level, uncapped, on an RTX 5070 Ti: Any360 runs 12% faster than ReXGlue's own runtime, with 1% lows 48% higher.**
+>
+> | 5 launches each, alternating | Any360 | ReXGlue | Rank test (z) |
+> |---|---|---|---|
+> | **Average FPS** | **815.7** | 727.3 | +16.41 |
+> | **Median FPS** | **809.2** | 731.9 | |
+> | **10% low** | **725.9** | 659.7 | +15.67 |
+> | **1% low** | **598.0** | 404.4 | +16.41 |
+> | **Slowest frame of the worst period** | **7.4 ms** | 49.7 ms | -2.61 |
+> | **Private memory** | 2800 MB | **1703 MB** | |
+>
+> 2026-11-26, Any360 `2f9a9d1`, game on cores 0-7. Both sides uncapped (no vsync, no frame limiter, vblank at 1000 Hz). The ReXGlue side keeps Any360's input group only, for the input script that drives both. Any360 uses about 1.1 GB more memory. Method and raw logs: [docs/perf/archive/2026-11-26-any360-vs-rexglue](docs/perf/archive/2026-11-26-any360-vs-rexglue/README.md).
+
 ## Where the rewrite stands
 
 <!-- progress:begin -->
@@ -18,9 +33,9 @@
 | **System calls** | 317 of 317 on `any360::sys` (opt-in) |
 | **Graphics** | `any360::gfx`, a Vulkan renderer handling 283 of 323 Xbox 360 GPU features (opt-in) |
 | **Host** | ReXGlue's loader, threads and window; Any360's own host is not started |
-| **Game code** | 23 of 58,125 functions rewritten in C++ (0.04%) |
+| **Game code** | 22 of 58,125 functions rewritten in C++ (0.04%) |
 
-Updated 2026-11-16. Every system call, module and rewritten function: [PROGRESS.md](docs/progress/PROGRESS.md). What is missing, step by step: [ROADMAP.md](docs/progress/ROADMAP.md). Function by function: [functions.csv](docs/progress/functions.csv).
+Updated 2026-11-26. Every system call, module and rewritten function: [PROGRESS.md](docs/progress/PROGRESS.md). What is missing, step by step: [ROADMAP.md](docs/progress/ROADMAP.md). Function by function: [functions.csv](docs/progress/functions.csv).
 <!-- progress:end -->
 
 ## What this is
