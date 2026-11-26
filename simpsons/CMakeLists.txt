@@ -27,6 +27,7 @@ set(SIMPSONS_SOURCES
     src/eye_shading.cpp
     src/frame_pacing.cpp
     src/freecam.cpp
+    src/camera_stick.cpp
     src/game_clock.cpp
     src/ink_outlines.cpp
     src/physics_step.cpp
@@ -92,4 +93,16 @@ endif()
 # (mprotect, neutered/no-op) and <unistd.h> (usleep). Scoped to this target.
 if(WIN32)
     target_include_directories(simpsons PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/compat_win)
+endif()
+
+# Linux: the runtime's shared libraries (built by the in-tree SDK into tools/rexglue-sdk/out/<platform>) next to the
+# executable, whose RUNPATH is $ORIGIN. Windows stages its DLLs in rexglue_configure_target.
+if(NOT WIN32)
+    foreach(_rex_lib rexruntime TracyClient SPIRV-Tools-shared)
+        if(TARGET ${_rex_lib})
+            add_custom_command(TARGET simpsons POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:${_rex_lib}> $<TARGET_FILE_DIR:simpsons>
+                VERBATIM)
+        endif()
+    endforeach()
 endif()
