@@ -21,7 +21,7 @@
 > | **Slowest frame of the worst period** | **7.4 ms** | 49.7 ms | -2.61 |
 > | **Private memory** | 2800 MB | **1703 MB** | |
 >
-> 2026-11-26, Any360 `2f9a9d1`, game on cores 0-7. Both sides uncapped (no vsync, no frame limiter, vblank at 1000 Hz). The ReXGlue side keeps Any360's input group only, for the input script that drives both. Any360 uses about 1.1 GB more memory. Method and raw logs: [docs/perf/archive/2026-11-26-any360-vs-rexglue](docs/perf/archive/2026-11-26-any360-vs-rexglue/README.md).
+> 2026-11-26, Any360 `2f9a9d1`, all 16 logical processors (the runtime reopens a launch script's mask at start; `--any360_cpu_affinity` holds it from Any360 38dfaac on). Both sides uncapped (no vsync, no frame limiter, vblank at 1000 Hz). The ReXGlue side keeps Any360's input group only, for the input script that drives both. Any360 uses about 1.1 GB more memory. Method and raw logs: [docs/perf/archive/2026-11-26-any360-vs-rexglue](docs/perf/archive/2026-11-26-any360-vs-rexglue/README.md).
 
 ## Where the rewrite stands
 
